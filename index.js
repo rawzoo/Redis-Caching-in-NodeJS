@@ -14,16 +14,16 @@ const client = redis.createClient({
 
 //Handle Error with Events
 client.on('error',err => {
-	console.log('Error'+err)
+	console.log('Error '+err)
 })
 
 //Show UI on Browser
 function setResponse(user,repo) {
-	return `<h1>${user} have this ${repo}</h1>`
+	return `<h1>${user} have total number of ${repo}</h1>`
 }
 
 //Call API from Public API of Github
-async function loadRepo(req , res,next){
+const loadRepo = async (req , res,next) =>{
 	try {
 		
 		const {username} = req.params
@@ -41,7 +41,7 @@ async function loadRepo(req , res,next){
 }
 
 //Get the data from Redis
-function cache(req,res,next) {
+const cache = (req,res,next) => {
 	const {username} = req.params
 
 	client.get(username,(err,data) => {
